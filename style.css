@@ -69,6 +69,165 @@ header {
     cursor: pointer;
 }
 
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 5%;
+    background-color: var(--turquoise-light);
+}
+
+.hero-container {
+    max-width: 760px;
+}
+
+.hero-container h1 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    color: var(--turquoise-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subheadline {
+    font-size: clamp(1rem, 2.1vw, 1.35rem);
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+.hero-cta-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--turquoise-main);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-cta-btn:hover {
+    background-color: var(--turquoise-dark);
+    transform: translateY(-2px);
+}
+
+/* --- About Section --- */
+.about-section {
+    background-color: var(--white);
+    padding: 4rem 5%;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-container h2 {
+    color: var(--turquoise-dark);
+    margin-bottom: 0.5rem;
+}
+
+.about-container > p {
+    margin-bottom: 1.5rem;
+}
+
+.about-qualifications-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.about-qualification-card {
+    background-color: var(--white);
+    border: 1px solid rgba(0, 134, 125, 0.12);
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Services Section --- */
+.services-section {
+    background-color: var(--turquoise-light);
+    padding: 4rem 5%;
+}
+
+.services-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.services-container h2 {
+    color: var(--turquoise-dark);
+    margin-bottom: 1.5rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.service-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon {
+    font-size: 2rem;
+    color: var(--turquoise-main);
+    margin-bottom: 0.75rem;
+}
+
+.service-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--turquoise-dark);
+}
+
+/* --- WhatsApp Floating Button --- */
+#whatsapp-robot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #25D366;
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    padding: 0.8rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    z-index: 9999;
+    animation: whatsapp-pulse 2s infinite;
+}
+
+#whatsapp-robot i {
+    font-size: 1.2rem;
+}
+
+@keyframes whatsapp-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45);
+    }
+    70% {
+        transform: scale(1.03);
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
 /* --- Mobile First Responsiveness --- */
 @media (max-width: 768px) {
     .desktop-nav {
@@ -76,5 +235,13 @@ header {
     }
     .mobile-menu-btn {
         display: block; /* Show hamburger menu on phones */
+    }
+
+    .about-qualifications-list {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
     }
 }
