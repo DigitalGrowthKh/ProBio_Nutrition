@@ -51,6 +51,13 @@ header {
     color: var(--turquoise-main);
 }
 
+.desktop-nav a.active {
+    color: var(--turquoise-main);
+    border-bottom: 2px solid var(--turquoise-main);
+    padding-bottom: 4px;
+    font-weight: 600;
+}
+
 .btn-primary {
     background-color: var(--turquoise-main);
     color: var(--white) !important;
@@ -251,6 +258,23 @@ header {
     .desktop-nav {
         display: none; /* Hide PC menu on phones */
     }
+
+    .desktop-nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 0.75rem 5% 1rem;
+    }
+
+    .desktop-nav.active a {
+        margin: 0.5rem 0;
+    }
+
     .mobile-menu-btn {
         display: block; /* Show hamburger menu on phones */
     }

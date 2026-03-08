@@ -28,7 +28,32 @@ function setupWhatsAppRobot() {
     });
 }
 
+function highlightActiveLink() {
+    const desktopNavLinks = document.querySelectorAll(".desktop-nav a");
+    const currentUrl = window.location.href.toLowerCase();
+    const currentPath = window.location.pathname.toLowerCase();
+    const currentFileName = currentPath.split("/").pop() || "index.html";
+
+    desktopNavLinks.forEach(function (link) {
+        const href = (link.getAttribute("href") || "").toLowerCase();
+
+        if (!href || href.startsWith("http")) {
+            return;
+        }
+
+        const hrefPath = href.split("#")[0].split("?")[0];
+        const hrefFileName = hrefPath.split("/").pop();
+        const isIncludedInUrl = currentUrl.includes(href);
+        const isSameFile = hrefFileName && hrefFileName === currentFileName;
+
+        if (isIncludedInUrl || isSameFile) {
+            link.classList.add("active");
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     setupMobileMenuToggle();
     setupWhatsAppRobot();
+    highlightActiveLink();
 });
