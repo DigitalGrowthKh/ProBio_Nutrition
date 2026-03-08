@@ -1,0 +1,80 @@
+/* --- Color Palette & Basics --- */
+:root {
+    --turquoise-light: #e0f2f1; /* Very gentle background */
+    --turquoise-main: #4db6ac;  /* Inviting primary brand color */
+    --turquoise-dark: #00867d;  /* Darker shade for text/contrast */
+    --text-dark: #333333;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--turquoise-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* --- Navigation --- */
+header {
+    background-color: var(--white);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--turquoise-dark);
+}
+
+.desktop-nav a {
+    text-decoration: none;
+    color: var(--text-dark);
+    margin-left: 2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.desktop-nav a:hover {
+    color: var(--turquoise-main);
+}
+
+.btn-primary {
+    background-color: var(--turquoise-main);
+    color: var(--white) !important;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+}
+
+.btn-primary:hover {
+    background-color: var(--turquoise-dark);
+}
+
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--turquoise-dark);
+    cursor: pointer;
+}
+
+/* --- Mobile First Responsiveness --- */
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none; /* Hide PC menu on phones */
+    }
+    .mobile-menu-btn {
+        display: block; /* Show hamburger menu on phones */
+    }
+}
