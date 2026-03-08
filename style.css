@@ -148,6 +148,24 @@ header {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
+.founder-headshot {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+.qualification-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 0.85rem;
+}
+
 /* --- Services Section --- */
 .services-section {
     background-color: var(--turquoise-light);
