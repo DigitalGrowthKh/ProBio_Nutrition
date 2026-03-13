@@ -95,6 +95,11 @@ function renderFaqFromSchema() {
         return;
     }
 
+    // Static HTML is already present — skip JS rendering to preserve it.
+    if (faqList.children.length > 0) {
+        return;
+    }
+
     faqList.innerHTML = "";
 
     faqSchema.mainEntity.forEach(function (item) {
