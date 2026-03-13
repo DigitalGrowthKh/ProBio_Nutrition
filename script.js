@@ -1,5 +1,91 @@
 console.log("script.js loaded");
 
+const THEME_STORAGE_KEY = "probio-theme";
+
+function getStoredTheme() {
+    try {
+        return localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (error) {
+        return null;
+    }
+}
+
+function getPreferredTheme() {
+    const storedTheme = getStoredTheme();
+
+    if (storedTheme === "light" || storedTheme === "dark") {
+        return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+}
+
+function updateThemeToggleButtons(theme) {
+    const isDarkTheme = theme === "dark";
+    const toggleButtons = document.querySelectorAll(".theme-toggle-btn");
+
+    toggleButtons.forEach(function (button) {
+        button.setAttribute("aria-pressed", String(isDarkTheme));
+        button.setAttribute("aria-label", isDarkTheme ? "Switch to light mode" : "Switch to dark mode");
+
+        const icon = button.querySelector("i");
+
+        if (!icon) {
+            return;
+        }
+
+        icon.classList.toggle("fa-moon", !isDarkTheme);
+        icon.classList.toggle("fa-sun", isDarkTheme);
+    });
+}
+
+function setTheme(theme, persistPreference) {
+    applyTheme(theme);
+    updateThemeToggleButtons(theme);
+
+    if (!persistPreference) {
+        return;
+    }
+
+    try {
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch (error) {
+        // Ignore storage errors (private browsing, disabled storage, etc.).
+    }
+}
+
+function setupThemeToggle() {
+    const toggleButtons = document.querySelectorAll(".theme-toggle-btn");
+
+    if (toggleButtons.length === 0) {
+        return;
+    }
+
+    toggleButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+            const nextTheme = currentTheme === "dark" ? "light" : "dark";
+            setTheme(nextTheme, true);
+        });
+    });
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    mediaQuery.addEventListener("change", function (event) {
+        const storedTheme = getStoredTheme();
+
+        if (storedTheme === "light" || storedTheme === "dark") {
+            return;
+        }
+
+        setTheme(event.matches ? "dark" : "light", false);
+    });
+}
+
 function setupMobileMenuToggle() {
     const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
     const desktopNav = document.querySelector(".desktop-nav");
@@ -187,6 +273,8 @@ function setupScrollReveal() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    setTheme(getPreferredTheme(), false);
+    setupThemeToggle();
     setupStickyHeaderOnScroll();
     setupMobileMenuToggle();
     setupWhatsAppRobot();
