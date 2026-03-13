@@ -41,6 +41,25 @@ function setupWhatsAppRobot() {
     });
 }
 
+function setupStickyHeaderOnScroll() {
+    const header = document.querySelector("header");
+
+    if (!header) {
+        return;
+    }
+
+    function updateHeaderState() {
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    }
+
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    updateHeaderState();
+}
+
 function highlightActiveLink() {
     const desktopNavLinks = document.querySelectorAll(".desktop-nav a");
     const currentUrl = window.location.href.toLowerCase();
@@ -129,9 +148,49 @@ function renderFaqFromSchema() {
     });
 }
 
+function setupScrollReveal() {
+    const hiddenElements = document.querySelectorAll(".hidden");
+
+    if (hiddenElements.length === 0) {
+        return;
+    }
+
+    // Fallback: reveal immediately when IntersectionObserver is unavailable.
+    if (!("IntersectionObserver" in window)) {
+        hiddenElements.forEach(function (element) {
+            element.classList.add("show");
+        });
+        return;
+    }
+
+    const observerOptions = {
+        root: null,
+        threshold: 0.15,
+        rootMargin: "0px 0px -8% 0px"
+    };
+
+    // Reveal each element once, then stop observing for better performance.
+    const revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+            if (!entry.isIntersecting) {
+                return;
+            }
+
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+        });
+    }, observerOptions);
+
+    hiddenElements.forEach(function (element) {
+        revealObserver.observe(element);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+    setupStickyHeaderOnScroll();
     setupMobileMenuToggle();
     setupWhatsAppRobot();
     highlightActiveLink();
     renderFaqFromSchema();
+    setupScrollReveal();
 });
