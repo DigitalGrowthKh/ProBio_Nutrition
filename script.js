@@ -65,8 +65,68 @@ function highlightActiveLink() {
     });
 }
 
+function renderFaqFromSchema() {
+    const faqList = document.getElementById("faq-list");
+
+    if (!faqList) {
+        return;
+    }
+
+    const schemaScripts = document.querySelectorAll('script[type="application/ld+json"]');
+    let faqSchema = null;
+
+    schemaScripts.forEach(function (scriptElement) {
+        if (faqSchema) {
+            return;
+        }
+
+        try {
+            const parsedSchema = JSON.parse(scriptElement.textContent);
+
+            if (parsedSchema && parsedSchema["@type"] === "FAQPage" && Array.isArray(parsedSchema.mainEntity)) {
+                faqSchema = parsedSchema;
+            }
+        } catch (error) {
+            console.warn("Unable to parse JSON-LD schema.", error);
+        }
+    });
+
+    if (!faqSchema) {
+        return;
+    }
+
+    faqList.innerHTML = "";
+
+    faqSchema.mainEntity.forEach(function (item) {
+        const question = item && item.name;
+        const answer = item && item.acceptedAnswer && item.acceptedAnswer.text;
+
+        if (!question || !answer) {
+            return;
+        }
+
+        const article = document.createElement("article");
+        article.className = "service-card";
+
+        const details = document.createElement("details");
+        details.className = "faq-item";
+
+        const summary = document.createElement("summary");
+        summary.textContent = question;
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = answer;
+
+        details.appendChild(summary);
+        details.appendChild(paragraph);
+        article.appendChild(details);
+        faqList.appendChild(article);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     setupMobileMenuToggle();
     setupWhatsAppRobot();
     highlightActiveLink();
+    renderFaqFromSchema();
 });

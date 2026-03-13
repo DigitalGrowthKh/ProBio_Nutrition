@@ -249,6 +249,176 @@ header {
     color: var(--turquoise-dark);
 }
 
+.faq-section {
+    background-color: var(--white);
+    padding: 0 5% 6rem;
+}
+
+.faq-section .services-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.faq-item {
+    width: 100%;
+}
+
+.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    color: var(--turquoise-dark);
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding-right: 2rem;
+    position: relative;
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    color: var(--turquoise-main);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.faq-item[open] summary::after {
+    content: "-";
+}
+
+.faq-item p {
+    margin-top: 0.9rem;
+}
+
+.blog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.blog-post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.blog-post-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.blog-post-card time {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.blog-post-card p {
+    flex-grow: 1;
+}
+
+.blog-read-more {
+    align-self: flex-start;
+    color: var(--primary-dark);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.blog-read-more::after {
+    content: " ->";
+    color: var(--accent);
+}
+
+.blog-read-more:hover {
+    color: var(--accent);
+}
+
+.blog-article-page {
+    padding: 7rem 5% 6rem;
+}
+
+.blog-article {
+    background-color: var(--white);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.blog-article h1 {
+    margin-bottom: 0.75rem;
+}
+
+.blog-article h2,
+.blog-article h3 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.blog-article p + p {
+    margin-top: 1rem;
+}
+
+.author-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.featured-article-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 8;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 1.75rem;
+}
+
+.author-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--primary-light);
+    border-radius: 16px;
+}
+
+.author-box img {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.author-box-content {
+    flex: 1;
+    min-width: 240px;
+}
+
+.author-box-content h2 {
+    margin-top: 0;
+}
+
+.author-box-content p {
+    margin-bottom: 1rem;
+}
+
 /* --- WhatsApp Floating Button --- */
 #whatsapp-robot {
     position: fixed;
@@ -323,5 +493,17 @@ header {
 
     .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-article {
+        padding: 1.5rem;
+    }
+
+    .author-box {
+        align-items: flex-start;
     }
 }
